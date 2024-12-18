@@ -1,0 +1,13 @@
+.main-container {
+    display: flex;
+    
+    .app-sidebar {
+        width: 250px;
+        @media (max-width: 998px) {
+            display: none;
+        }
+    }
+    .app-name-list {
+        width: 100%;
+    }
+}

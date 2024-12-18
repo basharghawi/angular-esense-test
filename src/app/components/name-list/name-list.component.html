@@ -1,0 +1,77 @@
+<main class="names-content">
+    <div class="add-section">
+        <button class="add-btn" (click)="onPopup('add')">
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#0179d7" fill-rule="evenodd" d="M9 17a1 1 0 102 0v-6h6a1 1 0 100-2h-6V3a1 1 0 10-2 0v6H3a1 1 0 000 2h6v6z"></path> 
+                </g>
+            </svg>
+            إضافة
+        </button>
+        <div class="app-nav-filter" (filter)="onFilter($event)"></div>
+    </div>
+    <div class="content-list">
+        <div class="content-item" *ngFor="let name of filteredNames">
+            <span>
+                {{name.name}}
+            </span>
+            <div class="actions">
+                <button class="edit-btn"
+                    (click)="onPopup('edit', name)"
+                >
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#007bff" fill-rule="evenodd" d="M15.586 3a2 2 0 0 1 2.828 0L21 5.586a2 2 0 0 1 0 2.828L19.414 10 14 4.586 15.586 3zm-3 3-9 9A2 2 0 0 0 3 16.414V19a2 2 0 0 0 2 2h2.586A2 2 0 0 0 9 20.414l9-9L12.586 6z" clip-rule="evenodd"></path>
+                        </g>
+                    </svg>    
+                    تعديل
+                </button>
+                <button class="delete-btn"
+                    (click)="onDelete(name.id)"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 1.5V2.5H3C2.44772 2.5 2 2.94772 2 3.5V4.5C2 5.05228 2.44772 5.5 3 5.5H21C21.5523 5.5 22 5.05228 22 4.5V3.5C22 2.94772 21.5523 2.5 21 2.5H16V1.5C16 0.947715 15.5523 0.5 15 0.5H9C8.44772 0.5 8 0.947715 8 1.5Z" fill="#eb0505"></path> <path d="M3.9231 7.5H20.0767L19.1344 20.2216C19.0183 21.7882 17.7135 23 16.1426 23H7.85724C6.28636 23 4.98148 21.7882 4.86544 20.2216L3.9231 7.5Z" fill="#eb0505"></path> 
+                        </g>
+                    </svg>  
+                    حذف
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<dialog id="popup_dialog">
+    <div class="dialog-header">
+        <h2 *ngIf="selectedPopup === 'add'">إضافة الاسم</h2>
+        <h2 *ngIf="selectedPopup === 'edit'">تعديل على الاسم</h2>
+        <button class="close-button" aria-label="Close" type="button" (click)="onDialogclose()">
+            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#b4b4b4" d="M195.2 195.2a64 64 0 0 1 90.496 0L512 421.504 738.304 195.2a64 64 0 0 1 90.496 90.496L602.496 512 828.8 738.304a64 64 0 0 1-90.496 90.496L512 602.496 285.696 828.8a64 64 0 0 1-90.496-90.496L421.504 512 195.2 285.696a64 64 0 0 1 0-90.496z"></path>
+                </g>
+            </svg>
+        </button>
+    </div>
+    <div class="dialog-content">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-inputs">
+                <label class="form-group">
+                    <span>الاسم <span class="required">*</span></span>
+                    <input type="text"
+                        formControlName="name"
+                        placeholder="اكتب الاسم أو الرقم"
+                        required
+                    />
+                    <span class="error-message" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+                        الاسم مطلوب
+                    </span>
+                </label>
+                <label class="form-group">
+                    <span for="details">التفاصيل</span>
+                    <input type="text" placeholder="التفاصيل" formControlName="description" />
+                </label>
+            </div>
+            <div class="dialog-footer">
+                <button type="submit" class="save-button" [disabled]="form.invalid">حفظ</button>
+                <button type="button" (click)="onDialogclose()" class="cancel-button">إلغاء</button>
+            </div>
+        </form>
+    </div>
+</dialog>

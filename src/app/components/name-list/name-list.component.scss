@@ -1,0 +1,178 @@
+.names-content {
+  width: 100%;
+
+  .add-section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background-color: #eff5fb;
+    padding: 4px 10px;
+
+    .add-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #000;
+      font-weight: 500;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .content-list {
+    padding: 10px;
+    .content-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 500;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        button {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 14px;
+
+          svg {
+            width: 15px;
+            height: 15px;
+          }
+
+          &.edit-btn {
+            color: #007bff;
+          }
+
+          &.delete-btn {
+            color: #eb0505;
+          }
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+#popup_dialog {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+
+  @media (max-width: 998px) {
+    width: 90vw;
+  }
+
+  .dialog-header {
+    background-color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+
+    h2 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .close-button {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .dialog-content {
+    background-color: #e9ebec;
+    .form-inputs {
+      padding: 15px;
+    }
+    .form-group {
+      display: block;
+      margin-bottom: 20px;
+      font-weight: 600;
+      width: 100%;
+      .required {
+        color: red;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 0.9rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+        &::placeholder {
+          color: #aaa;
+        }
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+
+    button {
+      padding: 5px 60px;
+
+      &.cancel-button {
+        background-color: #eee;
+        color: #555;
+        margin-right: 0.5rem;
+
+        &:hover {
+          background-color: #ddd;
+        }
+      }
+
+      &.save-button {
+        background-color: #007bff;
+        color: #fff;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+}
